@@ -1,0 +1,34 @@
+﻿@{
+    ViewData["Title"] = "Home";
+}
+@inject MyBookApp.Repository.IBookRepository _bookRepository
+<section class="jumbotron">
+    <div class="container text-center">
+        <h1>Welcome to Bookstore @ViewData["property1"]</h1>
+        <p class="lead text-muted">
+            Welcome to the book store Application where you can add books, view all available books
+            ,update your book and lot more,books are available in different languages,examples are yoruba, igbo, hausa, french'
+        </p>
+        <p>
+            <a href="a" class="btn btn-primary my-2">Search books</a>
+        </p>
+    </div>
+</section>
+
+
+<div class="py-5 bg-light">
+    <div class=" container">
+        <h3 class="h3">Top books</h3>
+        <vc:Top-books count ="3"></vc:Top-books></>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+
+        })
+    </script>
+}
+
+    

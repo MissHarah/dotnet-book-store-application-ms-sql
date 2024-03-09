@@ -1,0 +1,116 @@
+﻿@model Bookmodel
+@{
+   ViewData["Title"] = "Book Details" + Model.Title;
+}
+<div class="container">
+    <h3 class="display-4">Book details</h3>
+    <div class="row">
+        <div class="col-md-6">
+            <div id="carouselExampleIndicators" class="carousel slide">
+                <ol class="carousel-indicators">
+                    @for (int i =0; i < Model.Gallery.Count(); i++)
+                    {
+                         <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="@i" class="@(i==0 ? "active":"")"></li>
+                    }
+                </ol>
+                <div class="carousel-inner">
+                    @for (int i = 0; i < Model.Gallery.Count(); i++)
+                    {
+                        <div class="@(i==0 ? "carousel-item active" : "carousel-item")">
+                            <img class="d-block w-100" src="@Model.Gallery[i].URL" alt="@Model.Gallery[i].Name">
+                        </div>
+                    }
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>@Model.Title</h1>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12 text-primary">
+                    <span class="label label-primary">By; </span>
+                    <span class="font">@Model.Author</span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <p class="description">
+                        @Model.Description
+                    </p>
+                </div>
+            </div>
+
+            <div class="row">
+               <div class="col-md-4">
+                    <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Read now</button>
+               </div>
+            </div>
+
+            <hr />
+
+            <ul class="list-group">
+                <li class="list-group-item"><span class="font-weight-bold">Category - </span>@Model.Category</li>
+                <li class="list-group-item"><span class="font-weight-bold">Total pages - </span> @Model.TotalPages</li>
+                <li class="list-group-item"><span class="font-weight-bold">Language - </span> @Model.LanguageId</li>
+            </ul>
+    </div>
+</div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog model-ig" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                     @* <embed src="@Model.BookpdfUrl" class="w-100"/> *@
+                    <iframe src="@Model.BookpdfUrl" class="w-100"></iframe>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    @* <button type="button" class="btn btn-primary">Save changes</button> *@
+                </div>
+            </div>
+        </div>
+    </div>
+  </div> 
+
+<div class="py-5 bg-light">
+    <h3 class="h3">Similar books</h3>
+    <div class="row">
+        @for(int i =0; i < 5; i++)
+        {
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                    <svg class="bd-placeholder-img card-img-top" width="100%" height="225"></svg>
+                    <div class="card-body">
+                        <h3 class="card-title">@Model.Title</h3>
+                        <p class="card-text">@Model.Description</p>
+                        <div class="d-flex justify-content-between  align-items-center">
+                            <div class="btn-group">
+                                <a href="a" class="btn btn-sm btn btn-outline-secondary">View details</a>
+                            </div>
+                            <small class="text-bg-danger-muted">@Model.Author</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
